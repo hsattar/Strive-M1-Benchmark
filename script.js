@@ -118,18 +118,31 @@ const updateScore = () => {
 
 updatePpage()
 
-for (let i = 0; i < answerChoices.length; i++) {
-  answerChoices[i].addEventListener('click', event => {
-    let selectedAnswer = event.target
+const PreventMultipleAnswerClicks = () => {
+
+}
+
+const checkAnswer = event => {
+let selectedAnswer = event.target
     if (selectedAnswer.innerText === questions[currentQuestion - 1].correct_answer) {
       selectedAnswer.classList.add('correct-answer')
       score++
       updateScore()
     } else {
       selectedAnswer.classList.add('incorrect-answer')
+      for (answer of answerChoices) {
+        if (answer.innerText === questions[currentQuestion - 1].correct_answer) {
+          answer.classList.add('correct-answer')
+        }
+      }
     }
-  })
 }
+
+
+for (let i = 0; i < answerChoices.length; i++) {
+  answerChoices[i].addEventListener('click', checkAnswer)
+}
+
 
 const clearHighlightedAnswers = () => {
   for (answer of answerChoices) {

@@ -90,16 +90,20 @@ body {
 
 .correct-answer {
     background-color: #06d606;
+    cursor: default;
 }
 
 .correct-answer:hover {
     background-color: #06d606;
+    cursor: default;
 }
 
 .incorrect-answer {
     background-color: #fc0000;
+    cursor: default;
 }
 
 .incorrect-answer:hover {
     background-color: #fc0000;
+    cursor: default;
 }
