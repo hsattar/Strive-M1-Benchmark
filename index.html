@@ -6,6 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <title>Tech Quiz</title>
 
@@ -13,20 +16,22 @@
 <body>
     
 <div id="info-header">
-    <p>Question</p>
-    <p>Score</p>
+    <p id="question-header">Question:</p>
+    <p id="score-header">Score:</p>
 </div>
 
 <div id="question-area">
-    <p>Question 1</p>
-    <p>What Year Are We In?</p>
+    <p id="question-number">Question 1</p>
+    <p id="question">What Year Are We In?</p>
 </div>
 
 <div id="answers-area">
-    <div class="answer-choice">2021</div>
-    <div class="answer-choice">2020</div>
-    <div class="answer-choice">2019</div>
-    <div class="answer-choice">2018</div>
+    <div class="answer-selection-area">
+        <div class="answer-choice">2021</div>
+        <div class="answer-choice">2020</div>
+        <div class="answer-choice">2019</div>
+        <div class="answer-choice">2018</div>
+    </div>
     <div id="continue">Continue</div>
 </div>
 
