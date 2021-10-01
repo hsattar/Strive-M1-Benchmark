@@ -94,6 +94,7 @@ const questions = [
 
 let currentQuestion = 1
 let score = 0
+let userClicks = 0
 
 let questionHeader = document.getElementById('question-header')
 let scoreHeader = document.getElementById('score-header')
@@ -101,6 +102,12 @@ let questionNumber = document.getElementById('question-number')
 let question = document.getElementById('question')
 let answerChoices = document.getElementsByClassName('answer-choice')
 let nextQuestion = document.getElementsByClassName('next-question')[0]
+
+const checkForLastQuestion = () => {
+  if (currentQuestion === questions.length) {
+    nextQuestion.innerText = 'See Results'
+  }
+}
 
 const updatePpage = () => {
   questionHeader.innerText = `Question - ${currentQuestion}/${questions.length}`
@@ -110,6 +117,7 @@ const updatePpage = () => {
   for (let i = 0; i < questions[currentQuestion - 1].possible_answers.length; i++) {
     answerChoices[i].innerText = questions[currentQuestion - 1].possible_answers[i]
   }
+  checkForLastQuestion()
 }
 
 const updateScore = () => {
@@ -118,9 +126,9 @@ const updateScore = () => {
 
 updatePpage()
 
-const PreventMultipleAnswerClicks = () => {
+// const PreventMultipleAnswerClicks = () => {
 
-}
+// }
 
 const checkAnswer = event => {
 let selectedAnswer = event.target
@@ -128,8 +136,9 @@ let selectedAnswer = event.target
       selectedAnswer.classList.add('correct-answer')
       score++
       updateScore()
+      userClicks++
       nextQuestion.classList.remove('hide-next-q')
-      for (answer of answerChoices) {
+      for (let answer of answerChoices) {
       if (answer.classList.contains('correct-answer') === false) {
         answer.classList.add('not-selected')
       }
@@ -137,7 +146,8 @@ let selectedAnswer = event.target
     } else if (selectedAnswer.innerText !== questions[currentQuestion - 1].correct_answer) {
       selectedAnswer.classList.add('incorrect-answer')
       nextQuestion.classList.remove('hide-next-q')
-      for (answer of answerChoices) {
+      userClicks++
+      for (let answer of answerChoices) {
         if (answer.innerText === questions[currentQuestion - 1].correct_answer) {
           answer.classList.add('correct-answer')
         }
@@ -149,14 +159,16 @@ let selectedAnswer = event.target
 }
 
 
-for (let i = 0; i < answerChoices.length; i++) {
-  answerChoices[i].addEventListener('click', checkAnswer)
+if (userClicks < currentQuestion) {
+for (let answer of answerChoices) {
+    answer.addEventListener('click', checkAnswer)
+  }
 }
 
 
 const clearHighlightedAnswers = () => {
   nextQuestion.classList.add('hide-next-q')
-  for (answer of answerChoices) {
+  for (let answer of answerChoices) {
     if (answer.classList.contains('correct-answer') || answer.classList.contains('not-selected')) {
       answer.classList.remove('correct-answer')
       answer.classList.remove('not-selected')
@@ -168,7 +180,26 @@ const clearHighlightedAnswers = () => {
 }
 
 nextQuestion.addEventListener('click', () => {
-  currentQuestion++
-  clearHighlightedAnswers()
-  updatePpage()
+  if (currentQuestion === questions.length) {
+    let body = document.getElementsByTagName('body')[0]
+    body.innerHTML = `<h1>Your Score Is ${score}</h1>`
+  } else {
+    currentQuestion++
+    clearHighlightedAnswers()
+    updatePpage()
+  }
 })
+
+
+
+
+// TODO: PREVENT USER CLICKING MULTIPLE ANSWERS
+
+
+// TODO: DISPLAY RESULTS PAGE
+// STYLE THE RESULTS PAGE
+// CREATE A FUNTION TO CHANGE HTML OF PAGE WHICH SHOWS RESULTS
+
+
+// TODO: ADD WELCOME PAGE - WITH NUMBER OF QUESTION
+// TODO: ADD EXTRA INFORMATION IN INFO HEADER - CIRCLES TO INDICATE SCORE + QUESTIONS

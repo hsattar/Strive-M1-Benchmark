@@ -88,6 +88,10 @@ body {
     border-radius: .5rem;
 }
 
+.next-question:hover {
+    background-color: #6b6868;
+}
+
 .correct-answer {
     background-color: #06d606;
     cursor: default;
@@ -96,6 +100,7 @@ body {
 .correct-answer:hover {
     background-color: #06d606;
     cursor: default;
+    border: 1px solid #e4e4e4;
 }
 
 .incorrect-answer {
@@ -106,10 +111,17 @@ body {
 .incorrect-answer:hover {
     background-color: #fc0000;
     cursor: default;
+    border: 1px solid #e4e4e4;
 }
 
 .not-selected {
     opacity: .25;
+}
+
+.not-selected:hover {
+    background-color: #3e3e3e;
+    cursor: default;
+    border: 1px solid #e4e4e4;
 }
 
 .hide-next-q {
