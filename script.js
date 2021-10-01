@@ -95,12 +95,22 @@ let currentQuestion = 1
 let score = 0
 let userClicks = 0
 
+let welcomeContainer = document.getElementsByClassName('welcome-container')[0]
+let quizContainer = document.getElementsByClassName('quiz-container')[0]
+let startQuiz = document.getElementById('start-quiz')
 let questionHeader = document.getElementById('question-header')
 let scoreHeader = document.getElementById('score-header')
 let questionNumber = document.getElementById('question-number')
 let question = document.getElementById('question')
 let answerChoices = document.getElementsByClassName('answer-choice')
 let nextQuestion = document.getElementsByClassName('next-question')[0]
+
+const displayQuiz = () => {
+  welcomeContainer.classList.add('hide-welcome')
+  quizContainer.classList.remove('hide-quiz')
+}
+
+startQuiz.addEventListener('click', displayQuiz)
 
 const checkForLastQuestion = () => {
   if (currentQuestion === questions.length) {
@@ -172,10 +182,14 @@ const clearHighlightedAnswers = () => {
   }
 }
 
+const displayResults = () => {
+  let body = document.getElementsByTagName('body')[0]
+  body.innerHTML = `<h1 class="results">Your Score Is ${score}</h1>`
+}
+
 nextQuestion.addEventListener('click', () => {
   if (currentQuestion === questions.length) {
-    let body = document.getElementsByTagName('body')[0]
-    body.innerHTML = `<h1>Your Score Is ${score}</h1>`
+    displayResults()
   } else {
     currentQuestion++
     clearHighlightedAnswers()

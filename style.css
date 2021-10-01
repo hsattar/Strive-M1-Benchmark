@@ -14,6 +14,47 @@ body {
 }
 
 
+/* WELCOME PAGE */
+
+.welcome-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-headings {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.welcome-headings h1 {
+    font-size: 6rem;
+}
+
+.welcome-headings h2 {
+    font-size: 4rem;
+}
+
+#start-quiz {
+    height: 50vh;
+    border: 1px solid #e4e4e4;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.hide-welcome {
+    display: none;
+}
+
+.hide-quiz {
+    display: none;
+}
+
 
 /* INFO HEADER SECTION */
 
@@ -126,4 +167,15 @@ body {
 
 .hide-next-q {
     display: none;
+}
+
+
+/* RESULTS PAGE */
+
+.results {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10rem;
 }
