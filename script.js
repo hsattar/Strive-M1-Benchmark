@@ -91,7 +91,6 @@ const questions = [
     },
   ];
 
-
 let currentQuestion = 1
 let score = 0
 let userClicks = 0
@@ -120,51 +119,45 @@ const updatePpage = () => {
   checkForLastQuestion()
 }
 
+updatePpage()
+
 const updateScore = () => {
   scoreHeader.innerText = `Score - ${score}`  
 }
 
-updatePpage()
-
-// const PreventMultipleAnswerClicks = () => {
-
-// }
-
 const checkAnswer = event => {
-let selectedAnswer = event.target
-    if (selectedAnswer.innerText === questions[currentQuestion - 1].correct_answer) {
-      selectedAnswer.classList.add('correct-answer')
-      score++
-      updateScore()
-      userClicks++
-      nextQuestion.classList.remove('hide-next-q')
-      for (let answer of answerChoices) {
-      if (answer.classList.contains('correct-answer') === false) {
-        answer.classList.add('not-selected')
-      }
-    }
-    } else if (selectedAnswer.innerText !== questions[currentQuestion - 1].correct_answer) {
-      selectedAnswer.classList.add('incorrect-answer')
-      nextQuestion.classList.remove('hide-next-q')
-      userClicks++
-      for (let answer of answerChoices) {
-        if (answer.innerText === questions[currentQuestion - 1].correct_answer) {
-          answer.classList.add('correct-answer')
+  if (userClicks < currentQuestion) {
+    let selectedAnswer = event.target
+      if (selectedAnswer.innerText === questions[currentQuestion - 1].correct_answer) {
+        selectedAnswer.classList.add('correct-answer')
+        score++
+        updateScore()
+        userClicks++
+        nextQuestion.classList.remove('hide-next-q')
+        for (let answer of answerChoices) {
+          if (answer.classList.contains('correct-answer') === false) {
+            answer.classList.add('not-selected')
+          }
         }
-        if (answer.classList.contains('correct-answer') === false && answer.classList.contains('incorrect-answer') === false) {
-          answer.classList.add('not-selected')
+      } else if (selectedAnswer.innerText !== questions[currentQuestion - 1].correct_answer) {
+        selectedAnswer.classList.add('incorrect-answer')
+        nextQuestion.classList.remove('hide-next-q')
+        userClicks++
+        for (let answer of answerChoices) {
+          if (answer.innerText === questions[currentQuestion - 1].correct_answer) {
+            answer.classList.add('correct-answer')
+          }
+          if (answer.classList.contains('correct-answer') === false && answer.classList.contains('incorrect-answer') === false) {
+            answer.classList.add('not-selected')
+          }
         }
-      }
     }
-}
-
-
-if (userClicks < currentQuestion) {
-for (let answer of answerChoices) {
-    answer.addEventListener('click', checkAnswer)
   }
 }
 
+for (let answer of answerChoices) {
+  answer.addEventListener('click', checkAnswer)
+}
 
 const clearHighlightedAnswers = () => {
   nextQuestion.classList.add('hide-next-q')
@@ -190,10 +183,6 @@ nextQuestion.addEventListener('click', () => {
   }
 })
 
-
-
-
-// TODO: PREVENT USER CLICKING MULTIPLE ANSWERS
 
 
 // TODO: DISPLAY RESULTS PAGE
