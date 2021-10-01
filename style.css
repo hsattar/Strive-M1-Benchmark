@@ -1,0 +1,20 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: helvetica;
+    margin: 0;
+}
+
+#info-header {
+    background-color: lightgreen;
+    height: 8vh;
+}
+
+#question-area {
+    background-color: lightcoral;
+    height: 60vh;
+}
+
+#answers-area {
+    background-color: lightblue;
+    height: 32vh;
+}
