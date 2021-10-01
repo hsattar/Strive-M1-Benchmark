@@ -100,7 +100,7 @@ let scoreHeader = document.getElementById('score-header')
 let questionNumber = document.getElementById('question-number')
 let question = document.getElementById('question')
 let answerChoices = document.getElementsByClassName('answer-choice')
-let nextQuestion = document.getElementById('next-question')
+let nextQuestion = document.getElementsByClassName('next-question')[0]
 
 const updatePpage = () => {
   questionHeader.innerText = `Question - ${currentQuestion}/${questions.length}`
@@ -128,11 +128,21 @@ let selectedAnswer = event.target
       selectedAnswer.classList.add('correct-answer')
       score++
       updateScore()
-    } else {
+      nextQuestion.classList.remove('hide-next-q')
+      for (answer of answerChoices) {
+      if (answer.classList.contains('correct-answer') === false) {
+        answer.classList.add('not-selected')
+      }
+    }
+    } else if (selectedAnswer.innerText !== questions[currentQuestion - 1].correct_answer) {
       selectedAnswer.classList.add('incorrect-answer')
+      nextQuestion.classList.remove('hide-next-q')
       for (answer of answerChoices) {
         if (answer.innerText === questions[currentQuestion - 1].correct_answer) {
           answer.classList.add('correct-answer')
+        }
+        if (answer.classList.contains('correct-answer') === false && answer.classList.contains('incorrect-answer') === false) {
+          answer.classList.add('not-selected')
         }
       }
     }
@@ -145,10 +155,13 @@ for (let i = 0; i < answerChoices.length; i++) {
 
 
 const clearHighlightedAnswers = () => {
+  nextQuestion.classList.add('hide-next-q')
   for (answer of answerChoices) {
-    if (answer.classList.contains('correct-answer')) {
+    if (answer.classList.contains('correct-answer') || answer.classList.contains('not-selected')) {
       answer.classList.remove('correct-answer')
+      answer.classList.remove('not-selected')
     } else {
+      answer.classList.remove('not-selected')
       answer.classList.remove('incorrect-answer')
     }
   }
