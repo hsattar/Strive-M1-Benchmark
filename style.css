@@ -87,3 +87,19 @@ body {
     cursor: pointer;
     border-radius: .5rem;
 }
+
+.correct-answer {
+    background-color: #06d606;
+}
+
+.correct-answer:hover {
+    background-color: #06d606;
+}
+
+.incorrect-answer {
+    background-color: #fc0000;
+}
+
+.incorrect-answer:hover {
+    background-color: #fc0000;
+}

@@ -31,7 +31,7 @@ const questions = [
       type: "multiple",
       difficulty: "easy",
       question: "Which Programming Language Was Created First?",
-      possible_answers: ["JavaScript", "c", "Python", "PHP"],
+      possible_answers: ["JavaScript", "C", "Python", "PHP"],
       correct_answer: "C",
       incorrect_answers: ["JavaScript", "Python", "PHP"]
     },
@@ -102,10 +102,47 @@ let question = document.getElementById('question')
 let answerChoices = document.getElementsByClassName('answer-choice')
 let nextQuestion = document.getElementById('next-question')
 
-questionHeader.innerText = `Question - ${currentQuestion}/${questions.length}`
-scoreHeader.innerText = `Score - ${score}`
-questionNumber.innerText = `Question ${currentQuestion}`
-question.innerText = questions[currentQuestion - 1].question
-for (let i = 0; i < questions[currentQuestion - 1].possible_answers.length; i++) {
-  answerChoices[i].innerText = questions[currentQuestion - 1].possible_answers[i]
+const updatePpage = () => {
+  questionHeader.innerText = `Question - ${currentQuestion}/${questions.length}`
+  scoreHeader.innerText = `Score - ${score}`
+  questionNumber.innerText = `Question ${currentQuestion}`
+  question.innerText = questions[currentQuestion - 1].question
+  for (let i = 0; i < questions[currentQuestion - 1].possible_answers.length; i++) {
+    answerChoices[i].innerText = questions[currentQuestion - 1].possible_answers[i]
+  }
 }
+
+const updateScore = () => {
+  scoreHeader.innerText = `Score - ${score}`  
+}
+
+updatePpage()
+
+for (let i = 0; i < answerChoices.length; i++) {
+  answerChoices[i].addEventListener('click', event => {
+    let selectedAnswer = event.target
+    if (selectedAnswer.innerText === questions[currentQuestion - 1].correct_answer) {
+      selectedAnswer.classList.add('correct-answer')
+      score++
+      updateScore()
+    } else {
+      selectedAnswer.classList.add('incorrect-answer')
+    }
+  })
+}
+
+const clearHighlightedAnswers = () => {
+  for (answer of answerChoices) {
+    if (answer.classList.contains('correct-answer')) {
+      answer.classList.remove('correct-answer')
+    } else {
+      answer.classList.remove('incorrect-answer')
+    }
+  }
+}
+
+nextQuestion.addEventListener('click', () => {
+  currentQuestion++
+  clearHighlightedAnswers()
+  updatePpage()
+})
